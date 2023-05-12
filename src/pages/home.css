@@ -1,0 +1,16 @@
+#search_filter[data-visible="true"] {
+  height: 100%;
+  
+}
+
+#search_filter[data-visible="false"] {
+  height: 46px;
+  padding: 0;
+
+}
+
+#search_filter{
+  overflow: hidden;
+  transition: all .5s ease;
+  max-height: 205px;
+}

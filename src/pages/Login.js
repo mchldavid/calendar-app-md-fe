@@ -20,7 +20,7 @@ const Login = () => {
       </div>
 
       <form
-        className="login_form flex flex-col  w-full gap-y-1 "
+        className="login_form flex flex-col w-full gap-y-1 "
         onSubmit={handleLogin}
       >
         <label className="font-light">Email</label>
