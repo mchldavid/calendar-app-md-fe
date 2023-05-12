@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-const Appointment = () => {
+const Create = () => {
   const [appointment, setAppointment] = useState({
     name: "meet1",
     date: "Jan 1",
@@ -18,6 +18,9 @@ const Appointment = () => {
       </div>
 
       <div className="rounded-2xl bg-c4 text-c3 px-4 py-2">
+        <form>
+
+        </form>
         <div className="font-bold text-c3 h-10">{appointment.name}</div>
         <div className="flex justify-between">
           <div
@@ -31,7 +34,6 @@ const Appointment = () => {
           <div>{appointment.date}</div>
         </div>
       </div>
-
       <div className="flex justify-end mt-7 w-full">
         <button
           className="rounded-2xl bg-c3 text-c4 font-bold"
@@ -44,4 +46,4 @@ const Appointment = () => {
   )
 }
 
-export default Appointment
+export default Create

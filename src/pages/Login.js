@@ -43,7 +43,7 @@ const Login = () => {
           <button
             className="rounded-2xl bg-c3 text-c4 font-bold"
             onClick={() => {
-              navigate("/home")
+              navigate("/appointments")
             }}
           >
             Login

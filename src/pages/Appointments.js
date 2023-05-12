@@ -1,17 +1,20 @@
 import React, { useState } from "react"
-import "./home.css"
+import "./appointments.css"
+import { useNavigate} from "react-router-dom"
 
-const Home = () => {
+const Appointments = () => {
   const [filterKeywords, setFilterKeywords] = useState("")
   const [appointments, setAppoinments] = useState([])
   const [filterDate, setFilterDate] = useState()
+
+  const navigate = useNavigate()
 
   const handleSearch = (e) => {
     setFilterKeywords(e.target.value)
   }
 
   const handleFilterDate = (e) => {
-    console.log("date")
+    console.log("📋");
   }
 
   const handleAdd = () => {
@@ -105,10 +108,13 @@ const Home = () => {
             </li>
           ))
         ) : (
-          <div className="flex justify-center w-full text-c2 text-xl">There's no item to show.</div>
+          <div className="flex justify-center w-full text-c2 text-xl">There's no item to show 📋.</div>
         )}
       </ul>
-
+      
+      <button onClick={()=>navigate('/appointments/create')}>Create</button>
+      
+      
       <div className="flex justify-end mt-7 w-full">
         <button
           className="rounded-2xl bg-c3 text-c4 font-bold"
@@ -121,4 +127,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Appointments
