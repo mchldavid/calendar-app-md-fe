@@ -14,7 +14,8 @@ const Appointments = () => {
   }
 
   const handleFilterDate = (e) => {
-    console.log("📋");
+    console.log(e.target.value);
+    setFilterDate(e.target.value)
   }
 
   const handleAdd = () => {
