@@ -68,7 +68,7 @@ const Appointments = () => {
               type="date"
               onChange={(e) => handleFilterDate(e)}
               placeholder="Search Keywords"
-              value={filterDate}
+              value={String(filterDate)}
             />
           </div>
 

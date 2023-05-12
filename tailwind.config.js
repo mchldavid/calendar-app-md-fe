@@ -13,6 +13,7 @@ module.exports = {
         c4: "#F4EEE0",
         done: "#03C988",
         pending: "#ECB365",
+        delete: "#F15A59"
       },
     },
   },
