@@ -1,17 +1,23 @@
-import React, { useState } from "react"
+import React from "react"
 import "./login.css"
-import { useNavigate } from "react-router-dom"
+import { useLoginCredentials } from "../functions/useMutation"
 
 const Login = () => {
-  const navigate = useNavigate()
-  
+  const { mutate } = useLoginCredentials()
 
   const handleLogin = (e) => {
-    const email = e.target[0].value
-    const password = e.target[1].value
-
     e.preventDefault()
+    // const email = e.target[0].value
+    // const password = e.target[1].value
+    const email = document.getElementById("email").value
+    const password = document.getElementById("pass").value
     console.log(email, password)
+
+    //useMutation for POST login when success redirect to apointment page
+    mutate({
+      email: email,
+      password: password,
+    })
   }
 
   return (
@@ -43,8 +49,8 @@ const Login = () => {
         <div className="flex justify-end w-auto mt-7">
           <button
             className="rounded-2xl bg-c3 text-c4 font-bold"
-            onClick={() => {
-              navigate("/appointments")
+            onClick={(e) => {
+              handleLogin(e)
             }}
           >
             🔑 Login

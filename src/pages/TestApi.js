@@ -9,7 +9,6 @@ import {
 } from "../api/calendarAppApi"
 
 const TestApi = () => {
-  const [resLoginApi, setResLoginApi] = useState()
   const [output, setOutput] = useState()
   const [toggle, setToggle] = useState("pending")
 
@@ -22,7 +21,7 @@ const TestApi = () => {
           password: "Pass123",
         })
         console.log("API LOGIN: ", getResponse)
-        setResLoginApi(getResponse)
+        setOutput(getResponse)
         break
 
       case 2:
@@ -81,7 +80,6 @@ const TestApi = () => {
       <div className="w-full h-full flex justify-start items-start flex-col">
         <div>
           <button onClick={() => fetch(1)}>Test Login Api</button>{" "}
-          <pre>{JSON.stringify(resLoginApi)}</pre>
         </div>
         <div>
           <button onClick={() => fetch(2)}>Test Get Appointments</button>

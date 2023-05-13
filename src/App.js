@@ -7,6 +7,7 @@ import Update from "./pages/Update"
 import TestApi from "./pages/TestApi"
 
 const App = () => {
+
   return (
     <div className="font-inter text-sm flex justify-center items-center w-screen h-screen bg-c1 text-c4">
       <Routes>
