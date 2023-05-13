@@ -46,7 +46,7 @@ const Login = () => {
               navigate("/appointments")
             }}
           >
-            Login
+          🔑 Login
           </button>
         </div>
       </form>

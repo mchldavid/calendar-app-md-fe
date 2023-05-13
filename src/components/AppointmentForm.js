@@ -38,9 +38,9 @@ const AppointmentForm = (props) => {
     <div>
       <form onSubmit={handleClick}>
         <div className="rounded-2xl bg-c4 text-c3 px-4 py-4">
-          <div className="font-bold text-c3 text-xl h-10">Create</div>
+          <div className="font-bold text-c3 text-xl h-10">{props.title}</div>
           <div>
-            <label htmlFor="" className="m-0 font-bold">
+            <label htmlFor="" className="m-2 font-bold">
               Name:
             </label>
             <input
@@ -54,7 +54,7 @@ const AppointmentForm = (props) => {
             />
           </div>
           <div>
-            <label htmlFor="" className="m-0 font-bold">
+            <label htmlFor="" className="m-2 font-bold">
               Date:
             </label>
             <input
@@ -68,7 +68,7 @@ const AppointmentForm = (props) => {
             />
           </div>
           <div>
-            <label htmlFor="status" className="m-0 font-bold">
+            <label htmlFor="status" className="m-2 font-bold">
               Status:
             </label>
 
@@ -87,7 +87,7 @@ const AppointmentForm = (props) => {
         <div className="flex justify-between self-end mt-7 w-full">
           {props.showDelete && (
             <button className="rounded-2xl bg-delete text-c4 font-bold">
-              Delete
+            🗑️ Delete
             </button>
           )}
           {/* An invisible div is used to position the rightButton at the flex-end position while the delete button is hidden.*/}

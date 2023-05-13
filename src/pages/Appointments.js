@@ -1,11 +1,12 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import "./appointments.css"
-import { useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const Appointments = () => {
   const [filterKeywords, setFilterKeywords] = useState("")
   const [appointments, setAppoinments] = useState([])
-  const [filterDate, setFilterDate] = useState()
+  const [filterDate, setFilterDate] = useState(String(new Date().toISOString().slice(0, 10)))
+  const [filterButton, setFilterButton] = useState("🔍 Filter")
 
   const navigate = useNavigate()
 
@@ -14,14 +15,14 @@ const Appointments = () => {
   }
 
   const handleFilterDate = (e) => {
-    console.log(e.target.value);
+    console.log(e.target.value)
     setFilterDate(e.target.value)
   }
 
   const handleAdd = () => {
     setAppoinments((list) => [
       ...list,
-      { name: "New", status: "Pending", date: "Jan. 05 2023" },
+      { name: "New", status: "Pending", date: "Jan. 05 2023", id: "123" },
     ])
   }
 
@@ -31,10 +32,23 @@ const Appointments = () => {
 
     if (filter.getAttribute("data-visible") === "true") {
       filter.setAttribute("data-visible", false)
+      setFilterButton("🔍 Filter")
     } else {
       filter.setAttribute("data-visible", true)
+      setFilterButton("❌ Filter")
     }
   }
+
+  const handleViewDetails = (itemId) =>{
+    //redirect to view details by id
+    navigate(`/appointments/update/${itemId}`)
+  }
+
+  useEffect(() => {
+    //set default radio
+    const radioDefault = document.querySelector("#all")
+    radioDefault.checked = true
+  }, [])
 
   return (
     <div className="home max-w-md w-full flex flex-col p-6 h-full">
@@ -48,7 +62,7 @@ const Appointments = () => {
         className=" flex justify-start flex-col mb-3 text-c4 w-full h-fit"
       >
         <div className="flex justify-end">
-          <button onClick={handleFilter}>Filter</button>
+          <button onClick={handleFilter}>{filterButton}</button>
         </div>
         <div className="flex flex-col py-2 border-y border-c3 gap-1">
           <div className="flex flex-col">
@@ -92,7 +106,7 @@ const Appointments = () => {
         {Object.keys(appointments).length !== 0 ? (
           appointments.map((data, id) => (
             <li key={id}>
-              <div className="rounded-2xl bg-c4 text-c3 px-4 py-2">
+              <div className="rounded-2xl bg-c4 text-c3 px-4 py-2" onClick={() => handleViewDetails(data.id)}>
                 <div className="font-bold text-c3 h-10">{data.name}</div>
                 <div className="flex justify-between">
                   <div
@@ -109,13 +123,14 @@ const Appointments = () => {
             </li>
           ))
         ) : (
-          <div className="flex justify-center w-full text-c2 text-xl">There's no item to show 📋.</div>
+          <div className="flex justify-center w-full text-c2 text-xl">
+            There's no item 📋 to show.
+          </div>
         )}
       </ul>
-      
-      <button onClick={()=>navigate('/appointments/create')}>Create</button>
-      
-      
+
+      <button onClick={() => navigate("/appointments/create")}>Create</button>
+
       <div className="flex justify-end mt-7 w-full">
         <button
           className="rounded-2xl bg-c3 text-c4 font-bold"

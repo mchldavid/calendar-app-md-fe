@@ -1,11 +1,17 @@
-import React from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import AppointmentForm from "../components/AppointmentForm"
+import { useParams } from "react-router-dom"
 
-const Create = () => {
+const Update = () => {
   const navigate = useNavigate()
+  const paramsId = useParams()
 
-  const formattedDate = new Date().toISOString().slice(0, 10)
+  const [details, setDetails] = useState({
+    name: "udpate1",
+    date: "2020-10-15",
+    status: "completed"
+  })
 
   const handleSave = (data) => {
     console.log("name: ", data.name)
@@ -29,15 +35,16 @@ const Create = () => {
         <h1 className="text-3xl font-bold">Calendar App</h1>
       </div>
       <AppointmentForm
-        title={"Create"}
+        title={details.name + " - " + paramsId.id}
         clickHandler={handleSave}
-        name={""}
-        date={formattedDate}
-        status={"pending"}
-        rightButtonName={"💾 Save"}
+        name={details.name}
+        date={details.date}
+        status={details.status}
+        rightButtonName={"💾 Update"}
+        showDelete={true}
       />
     </div>
   )
 }
 
-export default Create
+export default Update
