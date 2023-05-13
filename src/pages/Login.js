@@ -1,9 +1,9 @@
 import React from "react"
 import "./login.css"
-import { useLoginCredentials } from "../functions/useMutation"
+import { useMutateLoginCredentials } from "../functions/useMutation"
 
 const Login = () => {
-  const { mutate } = useLoginCredentials()
+  const { mutate } = useMutateLoginCredentials()
 
   const handleLogin = (e) => {
     e.preventDefault()
@@ -13,7 +13,7 @@ const Login = () => {
     const password = document.getElementById("pass").value
     console.log(email, password)
 
-    //useMutation for POST login when success redirect to apointment page
+    //useMutation for POST login, if success redirect to apointment page
     mutate({
       email: email,
       password: password,

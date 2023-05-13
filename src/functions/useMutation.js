@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthContext"
 import { useNavigate } from "react-router-dom"
 
 //use to login
-export const useLoginCredentials = () => {
+export const useMutateLoginCredentials = () => {
   const { setCurrentUser } = useContext(AuthContext)
   const navigate = useNavigate()
 

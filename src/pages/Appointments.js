@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import "./appointments.css"
 import { useNavigate } from "react-router-dom"
+import { AuthContext } from "../context/AuthContext"
+import { useQueryGetAllAppointments } from "../functions/useQuery"
 
 const Appointments = () => {
   const [filterKeywords, setFilterKeywords] = useState("")
@@ -9,8 +11,14 @@ const Appointments = () => {
     String(new Date().toISOString().slice(0, 10))
   )
   const [filterButton, setFilterButton] = useState("🔍 Filter")
-
   const navigate = useNavigate()
+
+  //useQuery
+  const {data, isSuccess} = useQueryGetAllAppointments()
+  console.log("Query: ", appointments)
+
+  //context
+  const { currentUser } = useContext(AuthContext)
 
   const handleSearch = (e) => {
     setFilterKeywords(e.target.value)
@@ -112,14 +120,14 @@ const Appointments = () => {
 
       {/* List appointments */}
       <ul className="flex flex-col gap-y-3 w-full h-full overflow-y-auto">
-        {Object.keys(appointments).length !== 0 ? (
-          appointments.map((data, id) => (
+        {isSuccess ? (
+          data.map((item, id) => (
             <li key={id}>
               <div
                 className="rounded-2xl bg-c4 text-c3 px-4 py-2"
-                onClick={(e) => handleViewDetails(e, data.id)}
+                onClick={(e) => handleViewDetails(e, item.id)}
               >
-                <div className="font-bold text-c3 h-10">{data.name}</div>
+                <div className="font-bold text-c3 h-10">{item.name}</div>
                 <div className="flex justify-between">
                   <div className="flex gap-1">
                     <div
@@ -130,7 +138,7 @@ const Appointments = () => {
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
-                        color={data.status === "completed" ? "#03C988" : "gray"}
+                        color={item.status === "completed" ? "#03C988" : "gray"}
                         viewBox="0 0 24 24"
                         strokeWidth="2"
                         stroke="currentColor"
@@ -146,16 +154,16 @@ const Appointments = () => {
                     <div
                       className={
                         "text-c4 px-3 py-0.5 rounded-2xl " +
-                        (data.status === "completed"
+                        (item.status === "completed"
                           ? "bg-completed"
                           : " bg-pending")
                       }
                     >
-                      {data.status === "completed" ? "Done" : "Pending"}
+                      {item.status === "completed" ? "Done" : "Pending"}
                     </div>
                   </div>
 
-                  <div>{data.date}</div>
+                  <div>{item.date}</div>
                 </div>
               </div>
             </li>
@@ -174,9 +182,11 @@ const Appointments = () => {
           className="rounded-2xl bg-c3 text-c4 font-bold"
           onClick={() => navigate("/appointments/create")}
         >
-          Add
+          ➕ Add
         </button>
       </div>
+
+      {"users: " + currentUser.user.email}
     </div>
   )
 }
