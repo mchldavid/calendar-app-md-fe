@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import "./login.css"
 import { useNavigate } from "react-router-dom"
 
 const Login = () => {
   const navigate = useNavigate()
+  
 
   const handleLogin = (e) => {
     const email = e.target[0].value
@@ -46,7 +47,7 @@ const Login = () => {
               navigate("/appointments")
             }}
           >
-          🔑 Login
+            🔑 Login
           </button>
         </div>
       </form>
