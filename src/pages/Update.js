@@ -10,7 +10,7 @@ const Update = () => {
   const [details, setDetails] = useState({
     name: "udpate1",
     date: "2020-10-15",
-    status: "completed"
+    status: "completed",
   })
 
   const handleSave = (data) => {

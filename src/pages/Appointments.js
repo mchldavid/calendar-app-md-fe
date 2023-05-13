@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom"
 const Appointments = () => {
   const [filterKeywords, setFilterKeywords] = useState("")
   const [appointments, setAppoinments] = useState([])
-  const [filterDate, setFilterDate] = useState(String(new Date().toISOString().slice(0, 10)))
+  const [filterDate, setFilterDate] = useState(
+    String(new Date().toISOString().slice(0, 10))
+  )
   const [filterButton, setFilterButton] = useState("🔍 Filter")
 
   const navigate = useNavigate()
@@ -22,7 +24,7 @@ const Appointments = () => {
   const handleAdd = () => {
     setAppoinments((list) => [
       ...list,
-      { name: "New", status: "Pending", date: "Jan. 05 2023", id: "123" },
+      { name: "New", status: "pending", date: "Jan. 05 2023", id: "123" },
     ])
   }
 
@@ -39,9 +41,14 @@ const Appointments = () => {
     }
   }
 
-  const handleViewDetails = (itemId) =>{
+  const handleViewDetails = (e, itemId) => {
     //redirect to view details by id
     navigate(`/appointments/update/${itemId}`)
+  }
+
+  const handleToggleStatus = (e) => {
+    e.stopPropagation()
+    console.log("toggled")
   }
 
   useEffect(() => {
@@ -102,21 +109,52 @@ const Appointments = () => {
           </div>
         </div>
       </div>
+
+      {/* List appointments */}
       <ul className="flex flex-col gap-y-3 w-full h-full overflow-y-auto">
         {Object.keys(appointments).length !== 0 ? (
           appointments.map((data, id) => (
             <li key={id}>
-              <div className="rounded-2xl bg-c4 text-c3 px-4 py-2" onClick={() => handleViewDetails(data.id)}>
+              <div
+                className="rounded-2xl bg-c4 text-c3 px-4 py-2"
+                onClick={(e) => handleViewDetails(e, data.id)}
+              >
                 <div className="font-bold text-c3 h-10">{data.name}</div>
                 <div className="flex justify-between">
-                  <div
-                    className={
-                      "text-c4 px-3 py-0.5 rounded-2xl " +
-                      (data.status === "completed" ? "bg-done" : " bg-pending")
-                    }
-                  >
-                    {data.status === "completed" ? "Done" : "Pending"}
+                  <div className="flex gap-1">
+                    <div
+                      id="toggleStatus"
+                      onClick={(e) => handleToggleStatus(e)}
+                      className="cursor-pointer"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        color={data.status === "completed" ? "#03C988" : "gray"}
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+                    <div
+                      className={
+                        "text-c4 px-3 py-0.5 rounded-2xl " +
+                        (data.status === "completed"
+                          ? "bg-completed"
+                          : " bg-pending")
+                      }
+                    >
+                      {data.status === "completed" ? "Done" : "Pending"}
+                    </div>
                   </div>
+
                   <div>{data.date}</div>
                 </div>
               </div>
@@ -129,12 +167,12 @@ const Appointments = () => {
         )}
       </ul>
 
-      <button onClick={() => navigate("/appointments/create")}>Create</button>
+      <button onClick={handleAdd}>Bypass Add Item</button>
 
       <div className="flex justify-end mt-7 w-full">
         <button
           className="rounded-2xl bg-c3 text-c4 font-bold"
-          onClick={handleAdd}
+          onClick={() => navigate("/appointments/create")}
         >
           Add
         </button>
