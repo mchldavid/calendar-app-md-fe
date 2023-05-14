@@ -8,7 +8,7 @@ const Update = () => {
   const navigate = useNavigate()
   const paramsId = useParams()
 
-  const [details, setDetails] = useState({
+  const [sampleDetails, setDetails] = useState({
     name: "udpate1",
     date: "2020-10-15",
     status: "completed",
@@ -18,6 +18,10 @@ const Update = () => {
     console.log("name: ", data.name)
     console.log("date: ", data.date)
     console.log("status: ", data.status)
+  }
+
+  const handleDelete = () => {
+    
   }
 
   const handleBack = () => {
@@ -36,11 +40,12 @@ const Update = () => {
         <Title />
       </div>
       <AppointmentForm
-        title={details.name + " - " + paramsId.id}
-        clickHandler={handleSave}
-        name={details.name}
-        date={details.date}
-        status={details.status}
+        title={sampleDetails.name}
+        clickHandlerSave={handleSave}
+        clickHandlerDelete={handleDelete}
+        name={sampleDetails.name}
+        date={sampleDetails.date}
+        status={sampleDetails.status}
         rightButtonName={"💾 Update"}
         showDelete={true}
       />

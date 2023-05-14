@@ -4,13 +4,15 @@ const AppointmentForm = (props) => {
   const [name, setName] = useState("")
   const [date, setDate] = useState("")
   const [status, setStatus] = useState("pending")
+  const [id, setId] = useState(null)
 
   useEffect(() => {
     // set the initial values from props when they change
+    setId(props.id || null)
     setName(props.name || "")
     setDate(props.date || "")
     setStatus(props.status || "pending")
-  }, [props.name, props.date, props.status])
+  }, [props.id, props.name, props.date, props.status])
 
   const handleNameChange = (e) => {
     setName(e.target.value)
@@ -27,10 +29,18 @@ const AppointmentForm = (props) => {
   //pass the data
   const handleClick = (e) => {
     e.preventDefault()
-    props.clickHandler({
+    props.clickHandlerSave({
+      id: id,
       name: name,
       date: date,
       status: status,
+    })
+  }
+
+  //delete
+  const handleDelete = () => {
+    props.clickHandlerDelete({
+      id: id,
     })
   }
 
@@ -86,8 +96,11 @@ const AppointmentForm = (props) => {
         </div>
         <div className="flex justify-between self-end mt-7 w-full">
           {props.showDelete && (
-            <button className="rounded-2xl bg-delete text-c4 font-bold">
-            🗑️ Delete
+            <button
+              onClick={() => handleDelete(id)}
+              className="rounded-2xl bg-delete text-c4 font-bold"
+            >
+              🗑️ Delete
             </button>
           )}
           {/* An invisible div is used to position the rightButton at the flex-end position while the delete button is hidden.*/}
