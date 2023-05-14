@@ -14,11 +14,21 @@ label{
 
 button{
   width: fit-content;
-  padding: 5px 35px;
+  padding: 5px 30px;
 }
 
 .back-button{
   padding: 0;
   margin: 0;
   margin-right: 10px;
+}
+
+:root {
+  --toastify-color-light: #fff;
+  --toastify-color-dark: #121212;
+  --toastify-color-info: #3498db ;
+  --toastify-color-success: #03C988 !important;
+  --toastify-color-warning: #ECB365 !important;
+  --toastify-color-error: #F15A59 !important;
+  --toastify-color-transparent: rgba(255, 255, 255, 0.7);
 }

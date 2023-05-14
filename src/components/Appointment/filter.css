@@ -1,10 +1,10 @@
 #search_filter[data-visible="true"] {
-  height: 100%;
+  height: 188px;
   
 }
 
 #search_filter[data-visible="false"] {
-  height: 46px;
+  height: 15px;
   padding: 0;
 
 }

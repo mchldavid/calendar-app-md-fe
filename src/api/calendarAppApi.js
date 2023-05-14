@@ -31,6 +31,7 @@ export const getAppointments = async (filter) => {
     //to filter response
     var filteredResponse = response.data
     if (filter && Object.keys(filter).length > 0) {
+      //to filter name & status
       filteredResponse = filteredResponse.filter((appointment) => {
         const { name, date, status } = filter
 
@@ -38,10 +39,6 @@ export const getAppointments = async (filter) => {
           name.toLowerCase() &&
           appointment.name.toLowerCase() !== name.toLowerCase()
         ) {
-          return false
-        }
-
-        if (date && appointment.date !== date) {
           return false
         }
 
@@ -54,6 +51,15 @@ export const getAppointments = async (filter) => {
 
         return true
       })
+
+      //to date date
+      if (filter.sortDate === true) {
+        filteredResponse = filteredResponse.sort(function (a, b) {
+          // Turn your strings into dates, and then subtract them
+          // to get a value that is either negative, positive, or zero.
+          return new Date(b.date) - new Date(a.date)
+        })
+      }
     }
     console.log(response.data)
     return filteredResponse

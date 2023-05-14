@@ -21,7 +21,7 @@ const Login = () => {
   }
 
   if (isError) {
-    toast.error('Login Failed', {
+    toast.error("Login Failed", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: true,
@@ -30,7 +30,7 @@ const Login = () => {
       draggable: true,
       progress: undefined,
       theme: "colored",
-      });
+    })
   }
 
   return (
@@ -60,7 +60,9 @@ const Login = () => {
           required
         />
         <div className="flex justify-end w-auto mt-7">
-          <button className="rounded-2xl bg-c3 text-c4 font-bold">
+          <button
+            className="transition-all hover:opacity-80 rounded-2xl bg-c3 text-c4 font-bold "
+          >
             🔑 Login
           </button>
         </div>

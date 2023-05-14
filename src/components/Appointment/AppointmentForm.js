@@ -63,7 +63,7 @@ const AppointmentForm = (props) => {
   return (
     <div>
       <form>
-        <div className="rounded-2xl bg-c4 text-c3 px-4 py-4 flex flex-col gap-1">
+        <div className="mt-3 rounded-2xl bg-c4 text-c3 px-4 py-4 flex flex-col gap-1">
           <div className="font-bold text-c3 text-xl h-10">{props.title}</div>
           <div className="flex">
             <label htmlFor="" className="m-2 font-bold">
@@ -115,7 +115,7 @@ const AppointmentForm = (props) => {
             <button
               id="delete"
               onClick={handleDelete}
-              className="rounded-2xl bg-delete text-c4 font-bold"
+              className="transition-all hover:opacity-80 rounded-2xl bg-delete text-c4 font-bold"
             >
               🗑️ Delete
             </button>
@@ -125,7 +125,7 @@ const AppointmentForm = (props) => {
           <button
             id="save"
             onClick={handleSave}
-            className="rounded-2xl bg-c3 text-c4 font-bold"
+            className="transition-all hover:opacity-80 rounded-2xl bg-c3 text-c4 font-bold"
           >
             {props.rightButtonName}
           </button>

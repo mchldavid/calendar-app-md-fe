@@ -1,11 +1,12 @@
 import { useState } from "react"
 import debounce from "../../functions/useDebounce"
+import "./filter.css"
 
 const Filter = (props) => {
   const [filterKeywords, setFilterKeywords] = useState("")
-  const [filterDate, setFilterDate] = useState(null)
   const [filterStatus, setFilterStatus] = useState("all")
   const [filterButton, setFilterButton] = useState("Filter")
+  const [isSortDate, setIsSortDate] = useState(false)
 
   const handleFilterButton = () => {
     //show/hide the filter card
@@ -24,16 +25,16 @@ const Filter = (props) => {
   const handleChange = (input) => {
     props.handleFilterChange({
       name: input.name,
-      date: input.date,
+      sortDate: input.sortDate,
       status: input.status,
     })
   }
 
-  //debounce
+  //debounce when filterring data
   const searchDebounce = debounce((text) => {
     handleChange({
       name: text,
-      date: filterDate,
+      sortDate: isSortDate,
       status: filterStatus,
     })
   })
@@ -43,23 +44,23 @@ const Filter = (props) => {
     searchDebounce(e.target.value)
   }
 
-  const handleFilterDate = (e) => {
-    setFilterDate(e.target.value)
+  const handleSortDate = () => {
+    setIsSortDate(!isSortDate)
     handleChange({
       name: filterKeywords,
-      date: e.target.value,
+      sortDate: isSortDate,
       status: filterStatus,
     })
   }
 
   const handleStatus = () => {
-    var status = document.getElementsByName("radio-status")
+    var status = document.getElementsByName("type")
     for (var radio of status) {
       if (radio.checked) {
         setFilterStatus(radio.value.toLowerCase())
         handleChange({
           name: filterKeywords,
-          date: filterDate,
+          sortDate: isSortDate,
           status: radio.value.toLowerCase(),
         })
       }
@@ -67,11 +68,7 @@ const Filter = (props) => {
   }
 
   return (
-    <div
-      id="search_filter"
-      data-visible="false"
-      className=" flex justify-start flex-col mb-3 text-c4 w-full h-fit"
-    >
+    <>
       <div className="flex justify-end">
         <button
           onClick={handleFilterButton}
@@ -94,61 +91,153 @@ const Filter = (props) => {
           {filterButton}
         </button>
       </div>
-      <div className="flex flex-col py-2 border-y border-c3 gap-1">
-        <div className="flex flex-col">
-          <label className="font-light">Search</label>
-          <input
-            className="rounded-2xl bg-c4 text-c3"
-            type="input"
-            onChange={(e) => handleSearch(e)}
-            placeholder="Search Keywords"
-            value={filterKeywords}
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="font-light">Date</label>
-          <input
-            className="rounded-2xl bg-c4 text-c3"
-            type="date"
-            onChange={(e) => handleFilterDate(e)}
-            placeholder="Search Keywords"
-            value={String(filterDate)}
-          />
-        </div>
-        <div className="flex justify-center items-center w-full gap-6 mt-3">
-          <div>
+      <div
+        id="search_filter"
+        data-visible="false"
+        className=" flex justify-start flex-col mb-0 text-c4 w-full h-fit "
+      >
+        <div className="flex flex-col py-2 border-y border-c3 gap-1 pt-3">
+          <div className="flex flex-col">
+            <label className="font-light">Search</label>
             <input
-              type="radio"
-              id="all"
-              name="radio-status"
-              value="All"
-              onClick={handleStatus}
+              className="rounded-2xl bg-c4 text-c3"
+              type="input"
+              onChange={(e) => handleSearch(e)}
+              placeholder="Search Name"
+              value={filterKeywords}
             />
-            <label htmlFor="all">All</label>
           </div>
-          <div>
-            <input
-              type="radio"
-              id="completed"
-              name="radio-status"
-              value="Completed"
-              onClick={handleStatus}
-            />
-            <label htmlFor="completed">Done</label>
+
+          {/* Check box for sorting Date */}
+          <div className="flex items-center">
+            <div class="inline-flex items-center">
+              <label
+                class="relative flex cursor-pointer items-center rounded-full p-3"
+                for="checkbox"
+                data-ripple-dark="true"
+              >
+                <input
+                  type="checkbox"
+                  class="before:content[''] peer relative h-5 w-5 p-1  cursor-pointer appearance-none rounded-md border border-blue-c4 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-c4 checked:bg-c2 checked:before:bg-c4 hover:before:opacity-10"
+                  id="checkbox"
+                  onChange={handleSortDate}
+                  value={isSortDate}
+                />
+                <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-3.5 w-3.5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    stroke-width="1"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+              </label>
+            </div>
+            Sort Date Newest to Oldest
           </div>
+
           <div>
-            <input
-              type="radio"
-              id="pending"
-              name="radio-status"
-              value="Pending"
-              onClick={handleStatus}
-            />
-            <label htmlFor="pending">Pending</label>
+            <div class="inline-flex items-center">
+              <label
+                class="relative flex cursor-pointer items-center rounded-full p-3"
+                for="all"
+                data-ripple-dark="true"
+              >
+                <input
+                  id="all"
+                  name="type"
+                  type="radio"
+                  value="all"
+                  onClick={handleStatus}
+                  class="p-0 before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-pink-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-c4 checked:before:bg-c4 hover:before:opacity-10"
+                />
+                <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-c4 opacity-0 transition-opacity peer-checked:opacity-100">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-3.5 w-3.5"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                  >
+                    <circle data-name="ellipse" cx="8" cy="8" r="8"></circle>
+                  </svg>
+                </div>
+              </label>
+              <label class="mt-px cursor-pointer select-none" for="all">
+                All
+              </label>
+            </div>
+
+            <div class="inline-flex items-center">
+              <label
+                class="relative flex cursor-pointer items-center rounded-full p-3"
+                for="done"
+                data-ripple-dark="true"
+              >
+                <input
+                  id="done"
+                  name="type"
+                  type="radio"
+                  value="completed"
+                  onClick={handleStatus}
+                  class="p-0 before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-pink-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-c4 checked:before:bg-c4 hover:before:opacity-10"
+                />
+                <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-c4 opacity-0 transition-opacity peer-checked:opacity-100">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-3.5 w-3.5"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                  >
+                    <circle data-name="ellipse" cx="8" cy="8" r="8"></circle>
+                  </svg>
+                </div>
+              </label>
+              <label class="mt-px cursor-pointer select-none" for="done">
+                Done
+              </label>
+            </div>
+
+            <div class="inline-flex items-center">
+              <label
+                class="relative flex cursor-pointer items-center rounded-full p-3"
+                for="pending"
+                data-ripple-dark="true"
+              >
+                <input
+                  id="pending"
+                  name="type"
+                  type="radio"
+                  value="pending"
+                  onClick={handleStatus}
+                  class="p-0 before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-pink-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-c4 checked:before:bg-c4 hover:before:opacity-10"
+                />
+                <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-c4 opacity-0 transition-opacity peer-checked:opacity-100">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-3.5 w-3.5"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                  >
+                    <circle data-name="ellipse" cx="8" cy="8" r="8"></circle>
+                  </svg>
+                </div>
+              </label>
+              <label class="mt-px cursor-pointer select-none" for="pending">
+                Pending
+              </label>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
