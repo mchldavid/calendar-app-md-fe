@@ -2,9 +2,10 @@ import React from "react"
 import "./login.css"
 import { useMutateLoginCredentials } from "../functions/useMutation"
 import Title from "../components/Title"
+import { ToastContainer, toast } from "react-toastify"
 
 const Login = () => {
-  const { mutate } = useMutateLoginCredentials()
+  const { mutate, isError } = useMutateLoginCredentials()
 
   const handleLogin = (e) => {
     e.preventDefault()
@@ -17,6 +18,19 @@ const Login = () => {
       email: email,
       password: password,
     })
+  }
+
+  if (isError) {
+    toast.error('Login Failed', {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      });
   }
 
   return (
@@ -46,13 +60,23 @@ const Login = () => {
           required
         />
         <div className="flex justify-end w-auto mt-7">
-          <button
-            className="rounded-2xl bg-c3 text-c4 font-bold"
-          >
+          <button className="rounded-2xl bg-c3 text-c4 font-bold">
             🔑 Login
           </button>
         </div>
       </form>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+        theme="colored"
+      />
     </div>
   )
 }

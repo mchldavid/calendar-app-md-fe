@@ -8,6 +8,7 @@ import Filter from "../components/Appointment/Filter"
 import { useMutateToggleStatus } from "../functions/useMutation"
 import { FormContext } from "../context/FormContext"
 import formatDate from "../functions/formatDate"
+import Loading from "../components/Loaders/Loading"
 
 const Appointments = () => {
   const navigate = useNavigate()
@@ -16,7 +17,7 @@ const Appointments = () => {
   const [filter, setFilter] = useState({})
 
   //useQuery
-  const { data, isSuccess, refetch } = useQueryGetAllAppointments(filter)
+  const { data, isSuccess, isLoading} = useQueryGetAllAppointments(filter)
 
   //useMutation
   const mutateToggleStatus = useMutateToggleStatus()
@@ -65,7 +66,9 @@ const Appointments = () => {
 
       {/* List appointments */}
       <ul className="flex flex-col gap-y-3 w-full h-full overflow-y-auto">
-        {isSuccess && data.length !== 0 ? (
+        {isLoading ? (
+          <Loading />
+        ) : isSuccess && data.length !== 0 ? (
           data.map((item, id) => (
             <li key={id}>
               <div

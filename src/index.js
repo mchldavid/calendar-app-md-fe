@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "react-query"
 import "./index.css"
 import { AuthContextProvider } from "./context/AuthContext"
 import { FormContextProvider } from "./context/FormContext"
+import 'react-toastify/dist/ReactToastify.css';
 
 const queryClient = new QueryClient()
 

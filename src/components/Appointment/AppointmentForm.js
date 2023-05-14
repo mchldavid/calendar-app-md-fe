@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { ToastContainer, toast } from "react-toastify"
 
 const AppointmentForm = (props) => {
   const [name, setName] = useState("")
@@ -37,8 +38,17 @@ const AppointmentForm = (props) => {
         date: date,
         status: status,
       })
-    }else{
-      alert("Please enter name.");
+    } else {
+      toast.warn("Please enter name.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      })
     }
   }
 
@@ -121,6 +131,18 @@ const AppointmentForm = (props) => {
           </button>
         </div>
       </form>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+        theme="colored"
+      />
     </div>
   )
 }
