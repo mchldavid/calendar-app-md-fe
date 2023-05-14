@@ -41,7 +41,7 @@ const Create = () => {
       </div>
       <AppointmentForm
         title={"Create"}
-        clickHandler={handleSave}
+        clickHandlerSave={handleSave}
         name={""}
         date={formattedDate}
         status={"pending"}

@@ -26,7 +26,7 @@ const Appointments = () => {
   }
 
   const handleViewDetails = (e, item) => {
-    setFormData({...item})
+    setFormData({ ...item })
     console.log("Selected detail: ", item)
     //redirect to view details by id
     navigate(`/appointments/update/${item.name}`)
@@ -65,7 +65,7 @@ const Appointments = () => {
 
       {/* List appointments */}
       <ul className="flex flex-col gap-y-3 w-full h-full overflow-y-auto">
-        {isSuccess ? (
+        {isSuccess && data.length !== 0 ? (
           data.map((item, id) => (
             <li key={id}>
               <div

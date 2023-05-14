@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom"
 import AppointmentForm from "../components/Appointment/AppointmentForm"
 import Title from "../components/Title"
 import { FormContext } from "../context/FormContext"
+import {
+  useMutateDeleteAppointment,
+  useMutateEditAppointment,
+} from "../functions/useMutation"
 
 const Update = () => {
   const navigate = useNavigate()
@@ -10,13 +14,25 @@ const Update = () => {
   //context
   const { formData } = useContext(FormContext)
 
+  //useMutation
+  const mutateEditAppointment = useMutateEditAppointment()
+  const mutateDeleteAppointment = useMutateDeleteAppointment()
+
   const handleSave = (data) => {
-    console.log("name: ", data.name)
-    console.log("date: ", data.date)
-    console.log("status: ", data.status)
+    mutateEditAppointment.mutate({
+      id: data.id,
+      name: data.name,
+      date: data.date,
+      status: data.status,
+    })
   }
 
-  const handleDelete = () => {}
+  const handleDelete = (data) => {
+    console.log("Delete: ", data.id)
+    mutateDeleteAppointment.mutate({
+      id: data.id,
+    })
+  }
 
   const handleBack = () => {
     navigate(-1)

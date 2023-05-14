@@ -1,12 +1,15 @@
 import { useMutation } from "react-query"
 import {
   createAppointment,
+  deleteAppointment,
+  editAppointment,
   loginApi,
   toggleStatusAppointment,
 } from "../api/calendarAppApi"
 import { useContext } from "react"
 import { AuthContext } from "../context/AuthContext"
 import { useNavigate } from "react-router-dom"
+import { FormContext } from "../context/FormContext"
 
 //use to login
 export const useMutateLoginCredentials = () => {
@@ -58,6 +61,44 @@ export const useMutateToggleStatus = () => {
     {
       onSuccess: () => {
         console.log("Toggled Successfully!: ")
+      },
+    }
+  )
+}
+
+//use to Edit appointment
+export const useMutateEditAppointment = () => {
+  const { setFormData } = useContext(FormContext)
+  const navigate = useNavigate()
+
+  return useMutation(
+    (item) => {
+      return editAppointment(item)
+    },
+    {
+      onSuccess: () => {
+        console.log("Edit Successful!")
+        setFormData(null)
+        navigate(`/appointments`)
+      },
+    }
+  )
+}
+
+//use to delete appointment
+export const useMutateDeleteAppointment = () => {
+  const { setFormData } = useContext(FormContext)
+  const navigate = useNavigate()
+
+  return useMutation(
+    (item) => {
+      return deleteAppointment(item)
+    },
+    {
+      onSuccess: () => {
+        console.log("Delete Successful! ")
+        setFormData(null)
+        navigate(`/appointments`)
       },
     }
   )

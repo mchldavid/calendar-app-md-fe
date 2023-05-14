@@ -26,8 +26,8 @@ const AppointmentForm = (props) => {
     setStatus(e.target.value)
   }
 
-  //pass the data
-  const handleClick = (e) => {
+  //save
+  const handleSave = (e) => {
     e.preventDefault()
     props.clickHandlerSave({
       id: id,
@@ -38,7 +38,8 @@ const AppointmentForm = (props) => {
   }
 
   //delete
-  const handleDelete = () => {
+  const handleDelete = (e) => {
+    e.preventDefault()
     props.clickHandlerDelete({
       id: id,
     })
@@ -46,7 +47,7 @@ const AppointmentForm = (props) => {
 
   return (
     <div>
-      <form onSubmit={handleClick}>
+      <form>
         <div className="rounded-2xl bg-c4 text-c3 px-4 py-4">
           <div className="font-bold text-c3 text-xl h-10">{props.title}</div>
           <div>
@@ -97,7 +98,8 @@ const AppointmentForm = (props) => {
         <div className="flex justify-between self-end mt-7 w-full">
           {props.showDelete && (
             <button
-              onClick={() => handleDelete(id)}
+              id="delete"
+              onClick={handleDelete}
               className="rounded-2xl bg-delete text-c4 font-bold"
             >
               🗑️ Delete
@@ -105,7 +107,11 @@ const AppointmentForm = (props) => {
           )}
           {/* An invisible div is used to position the rightButton at the flex-end position while the delete button is hidden.*/}
           <div className="flex-1"></div>
-          <button className="rounded-2xl bg-c3 text-c4 font-bold">
+          <button
+            id="save"
+            onClick={handleSave}
+            className="rounded-2xl bg-c3 text-c4 font-bold"
+          >
             {props.rightButtonName}
           </button>
         </div>
