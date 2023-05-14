@@ -7,6 +7,7 @@ import {
   toggleStatusAppointment,
   deleteAppointment,
 } from "../api/calendarAppApi"
+import Filter from "../components/Appointment/Filter"
 
 const TestApi = () => {
   const [output, setOutput] = useState()
@@ -75,6 +76,10 @@ const TestApi = () => {
     }
   }
 
+  const handleShow = (data) => {
+    console.log("Filter: ", data)
+  }
+
   return (
     <>
       <div className="w-full h-full flex justify-start items-start flex-col">
@@ -100,6 +105,8 @@ const TestApi = () => {
           <div className="break-all">{JSON.stringify(output)}</div>
         </div>
       </div>
+
+      <Filter handleFilterChange={(result)=>handleShow(result)} />
     </>
   )
 }

@@ -1,6 +1,7 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
-import AppointmentForm from "../components/AppointmentForm"
+import AppointmentForm from "../components/Appointment/AppointmentForm"
+import Title from "../components/Title"
 
 const Create = () => {
   const navigate = useNavigate()
@@ -26,7 +27,7 @@ const Create = () => {
         >
           {"<"}
         </button>
-        <h1 className="text-3xl font-bold">Calendar App</h1>
+        <Title />
       </div>
       <AppointmentForm
         title={"Create"}

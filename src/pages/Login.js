@@ -1,6 +1,7 @@
 import React from "react"
 import "./login.css"
 import { useMutateLoginCredentials } from "../functions/useMutation"
+import Title from "../components/Title"
 
 const Login = () => {
   const { mutate } = useMutateLoginCredentials()
@@ -23,7 +24,7 @@ const Login = () => {
   return (
     <div className="login max-w-xs w-full flex flex-col">
       <div className="flex justify-start mx-1 mb-5">
-        <h1 className="text-3xl font-bold">Calendar App</h1>
+        <Title />
       </div>
 
       <form

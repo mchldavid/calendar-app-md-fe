@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import AppointmentForm from "../components/AppointmentForm"
+import AppointmentForm from "../components/Appointment/AppointmentForm"
 import { useParams } from "react-router-dom"
+import Title from "../components/Title"
 
 const Update = () => {
   const navigate = useNavigate()
@@ -32,7 +33,7 @@ const Update = () => {
         >
           {"<"}
         </button>
-        <h1 className="text-3xl font-bold">Calendar App</h1>
+        <Title />
       </div>
       <AppointmentForm
         title={details.name + " - " + paramsId.id}
