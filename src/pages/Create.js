@@ -2,9 +2,13 @@ import React from "react"
 import { useNavigate } from "react-router-dom"
 import AppointmentForm from "../components/Appointment/AppointmentForm"
 import Title from "../components/Title"
+import { useMutateCreateAppointment } from "../functions/useMutation"
 
 const Create = () => {
   const navigate = useNavigate()
+
+  //useMutation
+  const mutateCreateAppointment = useMutateCreateAppointment()
 
   const formattedDate = new Date().toISOString().slice(0, 10)
 
@@ -12,6 +16,12 @@ const Create = () => {
     console.log("name: ", data.name)
     console.log("date: ", data.date)
     console.log("status: ", data.status)
+
+    mutateCreateAppointment.mutate({
+      name: data.name,
+      date: data.date,
+      status: data.status,
+    })
   }
 
   const handleBack = () => {

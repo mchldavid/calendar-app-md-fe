@@ -1,5 +1,9 @@
 import { useMutation } from "react-query"
-import { loginApi, toggleStatusAppointment } from "../api/calendarAppApi"
+import {
+  createAppointment,
+  loginApi,
+  toggleStatusAppointment,
+} from "../api/calendarAppApi"
 import { useContext } from "react"
 import { AuthContext } from "../context/AuthContext"
 import { useNavigate } from "react-router-dom"
@@ -29,11 +33,27 @@ export const useMutateLoginCredentials = () => {
   )
 }
 
+//use to create appointment
+export const useMutateCreateAppointment = () => {
+  const navigate = useNavigate()
+
+  return useMutation(
+    (item) => {
+      return createAppointment(item)
+    },
+    {
+      onSuccess: () => {
+        navigate(`/appointments`)
+      },
+    }
+  )
+}
+
 //use to Patched toggle Status
 export const useMutateToggleStatus = () => {
   return useMutation(
-    (credentials) => {
-      return toggleStatusAppointment(credentials)
+    (item) => {
+      return toggleStatusAppointment(item)
     },
     {
       onSuccess: () => {
