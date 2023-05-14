@@ -64,7 +64,7 @@ export const editAppointment = async (detail) => {
   }
 }
 
-// PATCH Edit details
+// PATCH Status
 export const toggleStatusAppointment = async (detail) => {
   try {
     const response = await calendarAppApi.patch(`/appointment/${detail.id}`, {

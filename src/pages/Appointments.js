@@ -1,28 +1,23 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect } from "react"
 import "./appointments.css"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
 import { useQueryGetAllAppointments } from "../functions/useQuery"
 import Title from "../components/Title"
 import Filter from "../components/Appointment/Filter"
+import { useMutateToggleStatus } from "../functions/useMutation"
 
 const Appointments = () => {
-  const [appointments, setAppoinments] = useState([])
   const navigate = useNavigate()
 
   //useQuery
-  const { data, isSuccess } = useQueryGetAllAppointments()
-  console.log("Query: ", appointments)
+  const { data, isSuccess, refetch } = useQueryGetAllAppointments()
+
+  //useMutation
+  const mutateToggleStatus = useMutateToggleStatus()
 
   //context
   const { currentUser } = useContext(AuthContext)
-
-  const handleAdd = () => {
-    setAppoinments((list) => [
-      ...list,
-      { name: "New", status: "pending", date: "Jan. 05 2023", id: "123" },
-    ])
-  }
 
   const handleFilterChange = (res) => {
     console.log("Filters: ", res)
@@ -33,9 +28,19 @@ const Appointments = () => {
     navigate(`/appointments/update/${itemId}`)
   }
 
-  const handleToggleStatus = (e) => {
+  const handleToggleStatus = (e, item) => {
     e.stopPropagation()
-    console.log("toggled")
+    console.log("toggle is working: ", item)
+
+    //Patch status of appointment
+    mutateToggleStatus.mutate({
+      id: item.id,
+      status: item.status === "pending" ? "completed" : "pending",
+    })
+  }
+
+  if (mutateToggleStatus.isLoading) {
+    refetch()
   }
 
   useEffect(() => {
@@ -68,7 +73,12 @@ const Appointments = () => {
                   <div className="flex gap-1">
                     <div
                       id="toggleStatus"
-                      onClick={(e) => handleToggleStatus(e)}
+                      onClick={(e) =>
+                        handleToggleStatus(e, {
+                          id: item.id,
+                          status: item.status,
+                        })
+                      }
                       className="cursor-pointer"
                     >
                       <svg
@@ -110,8 +120,6 @@ const Appointments = () => {
           </div>
         )}
       </ul>
-
-      <button onClick={handleAdd}>Bypass Add Item</button>
 
       <div className="flex justify-end mt-7 w-full">
         <button

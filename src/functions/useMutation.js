@@ -1,5 +1,5 @@
 import { useMutation } from "react-query"
-import { loginApi } from "../api/calendarAppApi"
+import { loginApi, toggleStatusAppointment } from "../api/calendarAppApi"
 import { useContext } from "react"
 import { AuthContext } from "../context/AuthContext"
 import { useNavigate } from "react-router-dom"
@@ -24,6 +24,20 @@ export const useMutateLoginCredentials = () => {
           },
         })
         navigate(`/appointments`)
+      },
+    }
+  )
+}
+
+//use to Patched toggle Status
+export const useMutateToggleStatus = () => {
+  return useMutation(
+    (credentials) => {
+      return toggleStatusAppointment(credentials)
+    },
+    {
+      onSuccess: () => {
+        console.log("Toggled Successfully!: ")
       },
     }
   )
