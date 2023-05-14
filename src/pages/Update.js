@@ -1,18 +1,14 @@
-import React, { useState } from "react"
+import React, { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import AppointmentForm from "../components/Appointment/AppointmentForm"
-import { useParams } from "react-router-dom"
 import Title from "../components/Title"
+import { FormContext } from "../context/FormContext"
 
 const Update = () => {
   const navigate = useNavigate()
-  const paramsId = useParams()
 
-  const [sampleDetails, setDetails] = useState({
-    name: "udpate1",
-    date: "2020-10-15",
-    status: "completed",
-  })
+  //context
+  const { formData } = useContext(FormContext)
 
   const handleSave = (data) => {
     console.log("name: ", data.name)
@@ -20,9 +16,7 @@ const Update = () => {
     console.log("status: ", data.status)
   }
 
-  const handleDelete = () => {
-    
-  }
+  const handleDelete = () => {}
 
   const handleBack = () => {
     navigate(-1)
@@ -39,13 +33,15 @@ const Update = () => {
         </button>
         <Title />
       </div>
+      {console.log("Form Context: ")}
       <AppointmentForm
-        title={sampleDetails.name}
+        id={formData.id}
+        title={formData.name}
         clickHandlerSave={handleSave}
         clickHandlerDelete={handleDelete}
-        name={sampleDetails.name}
-        date={sampleDetails.date}
-        status={sampleDetails.status}
+        name={formData.name}
+        date={formData.date}
+        status={formData.status}
         rightButtonName={"💾 Update"}
         showDelete={true}
       />

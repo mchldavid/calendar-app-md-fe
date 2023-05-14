@@ -6,6 +6,7 @@ import { useQueryGetAllAppointments } from "../functions/useQuery"
 import Title from "../components/Title"
 import Filter from "../components/Appointment/Filter"
 import { useMutateToggleStatus } from "../functions/useMutation"
+import { FormContext } from "../context/FormContext"
 
 const Appointments = () => {
   const navigate = useNavigate()
@@ -18,14 +19,17 @@ const Appointments = () => {
 
   //context
   const { currentUser } = useContext(AuthContext)
+  const { setFormData } = useContext(FormContext)
 
   const handleFilterChange = (res) => {
     console.log("Filters: ", res)
   }
 
-  const handleViewDetails = (e, itemId) => {
+  const handleViewDetails = (e, item) => {
+    setFormData({...item})
+    console.log("Selected detail: ", item)
     //redirect to view details by id
-    navigate(`/appointments/update/${itemId}`)
+    navigate(`/appointments/update/${item.name}`)
   }
 
   const handleToggleStatus = (e, item) => {
@@ -66,7 +70,7 @@ const Appointments = () => {
             <li key={id}>
               <div
                 className="rounded-2xl bg-c4 text-c3 px-4 py-2"
-                onClick={(e) => handleViewDetails(e, item.id)}
+                onClick={(e) => handleViewDetails(e, item)}
               >
                 <div className="font-bold text-c3 h-10">{item.name}</div>
                 <div className="flex justify-between">

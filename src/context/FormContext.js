@@ -3,11 +3,11 @@ import { createContext, useState } from "react"
 export const FormContext = createContext()
 
 export const FormContextProvider = ({ children }) => {
-  const [appointment, setAppointment] = useState({})
+  const [formData, setFormData] = useState(null)
 
   return (
-    <FormContextProvider.Provider value={{ appointment, setAppointment }}>
+    <FormContext.Provider value={{ formData, setFormData }}>
       {children}
-    </FormContextProvider.Provider>
+    </FormContext.Provider>
   )
 }

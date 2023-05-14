@@ -5,6 +5,7 @@ import App from "./App"
 import { QueryClient, QueryClientProvider } from "react-query"
 import "./index.css"
 import { AuthContextProvider } from "./context/AuthContext"
+import { FormContextProvider } from "./context/FormContext"
 
 const queryClient = new QueryClient()
 
@@ -14,7 +15,9 @@ root.render(
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <AuthContextProvider>
-          <App />
+          <FormContextProvider>
+            <App />
+          </FormContextProvider>
         </AuthContextProvider>
       </QueryClientProvider>
     </BrowserRouter>

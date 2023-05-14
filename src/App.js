@@ -8,8 +8,6 @@ import TestApi from "./pages/TestApi"
 import { AuthContext } from "./context/AuthContext"
 
 const App = () => {
-  const { currentUser } = useContext(AuthContext)
-
   //if there's a logged in person, redirect to
   const AuthenticatedRoute = ({ children }) => {
     const { currentUser } = useContext(AuthContext)
@@ -34,6 +32,7 @@ const App = () => {
             </AuthenticatedRoute>
           }
         />
+
         <Route
           path="/appointments/create"
           element={
@@ -43,7 +42,7 @@ const App = () => {
           }
         />
         <Route
-          path="/appointments/update/:id"
+          path="/appointments/update/:name"
           element={
             <AuthenticatedRoute>
               <Update />
