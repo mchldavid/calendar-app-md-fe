@@ -29,12 +29,17 @@ const AppointmentForm = (props) => {
   //save
   const handleSave = (e) => {
     e.preventDefault()
-    props.clickHandlerSave({
-      id: id,
-      name: name,
-      date: date,
-      status: status,
-    })
+
+    if (name.trim() !== "") {
+      props.clickHandlerSave({
+        id: id,
+        name: name,
+        date: date,
+        status: status,
+      })
+    }else{
+      alert("Please enter name.");
+    }
   }
 
   //delete
@@ -48,14 +53,14 @@ const AppointmentForm = (props) => {
   return (
     <div>
       <form>
-        <div className="rounded-2xl bg-c4 text-c3 px-4 py-4">
+        <div className="rounded-2xl bg-c4 text-c3 px-4 py-4 flex flex-col gap-1">
           <div className="font-bold text-c3 text-xl h-10">{props.title}</div>
-          <div>
+          <div className="flex">
             <label htmlFor="" className="m-2 font-bold">
               Name:
             </label>
             <input
-              className="rounded-2xl bg-c4 text-c3"
+              className="rounded-2xl bg-c4 text-c3 w-full"
               id="name"
               type="text"
               placeholder="Enter name"
@@ -64,7 +69,7 @@ const AppointmentForm = (props) => {
               required
             />
           </div>
-          <div>
+          <div className="flex">
             <label htmlFor="" className="m-2 font-bold">
               Date:
             </label>
@@ -78,7 +83,7 @@ const AppointmentForm = (props) => {
               required
             />
           </div>
-          <div>
+          <div className="flex">
             <label htmlFor="status" className="m-2 font-bold">
               Status:
             </label>

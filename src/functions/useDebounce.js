@@ -1,4 +1,4 @@
-export default function debounce(cb, delay = 500) {
+export default function debounce(cb, delay = 600) {
   let timeout
 
   return (...args) => {

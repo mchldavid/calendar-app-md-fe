@@ -3,9 +3,7 @@ import debounce from "../../functions/useDebounce"
 
 const Filter = (props) => {
   const [filterKeywords, setFilterKeywords] = useState("")
-  const [filterDate, setFilterDate] = useState(
-    String(new Date().toISOString().slice(0, 10))
-  )
+  const [filterDate, setFilterDate] = useState(null)
   const [filterStatus, setFilterStatus] = useState("all")
   const [filterButton, setFilterButton] = useState("Filter")
 
@@ -117,8 +115,7 @@ const Filter = (props) => {
             value={String(filterDate)}
           />
         </div>
-
-        <div className="flex justify-center w-full gap-6 mt-3">
+        <div className="flex justify-center items-center w-full gap-6 mt-3">
           <div>
             <input
               type="radio"

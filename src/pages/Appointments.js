@@ -7,6 +7,7 @@ import Title from "../components/Title"
 import Filter from "../components/Appointment/Filter"
 import { useMutateToggleStatus } from "../functions/useMutation"
 import { FormContext } from "../context/FormContext"
+import formatDate from "../functions/formatDate"
 
 const Appointments = () => {
   const navigate = useNavigate()
@@ -44,10 +45,6 @@ const Appointments = () => {
       id: item.id,
       status: item.status === "pending" ? "completed" : "pending",
     })
-  }
-
-  if (mutateToggleStatus.isLoading) {
-    refetch()
   }
 
   useEffect(() => {
@@ -116,7 +113,7 @@ const Appointments = () => {
                     </div>
                   </div>
 
-                  <div>{item.date}</div>
+                  <div>{formatDate(item.date)}</div>
                 </div>
               </div>
             </li>
