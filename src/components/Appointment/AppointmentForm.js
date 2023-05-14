@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react"
 import { ToastContainer, toast } from "react-toastify"
+import Confirmation from "./Confirmation"
 
 const AppointmentForm = (props) => {
   const [name, setName] = useState("")
   const [date, setDate] = useState("")
   const [status, setStatus] = useState("pending")
   const [id, setId] = useState(null)
+  const [showConfirmation, setShowConfirmation] = useState(false)
 
   useEffect(() => {
     // set the initial values from props when they change
@@ -55,13 +57,28 @@ const AppointmentForm = (props) => {
   //delete
   const handleDelete = (e) => {
     e.preventDefault()
-    props.clickHandlerDelete({
-      id: id,
-    })
+    setShowConfirmation(true)
+  }
+
+  const handleConfirmationFeedback = (isConfirm) => {
+    if (isConfirm) {
+      props.clickHandlerDelete({
+        id: id,
+      })
+    } else {
+      setShowConfirmation(false)
+    }
   }
 
   return (
     <div>
+      {showConfirmation && (
+        <Confirmation
+          clickHandler={handleConfirmationFeedback}
+          message={"Are you sure you want to delete?"}
+        />
+      )}
+
       <form>
         <div className="mt-3 rounded-2xl bg-c4 text-c3 px-4 py-4 flex flex-col gap-1">
           <div className="font-bold text-c3 text-xl h-10">{props.title}</div>
