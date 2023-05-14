@@ -24,11 +24,39 @@ export const loginApi = async (user) => {
 }
 
 // GET all Appointments
-export const getAppointments = async () => {
+export const getAppointments = async (filter) => {
   try {
     const response = await calendarAppApi.get("/appointment")
+
+    //to filter response
+    var filteredResponse = response.data
+    if (filter && Object.keys(filter).length > 0) {
+      filteredResponse = filteredResponse.filter((appointment) => {
+        const { name, date, status } = filter
+
+        if (
+          name.toLowerCase() &&
+          appointment.name.toLowerCase() !== name.toLowerCase()
+        ) {
+          return false
+        }
+
+        if (date && appointment.date !== date) {
+          return false
+        }
+
+        if (status && status !== "all") {
+          if (appointment.status !== status) {
+            console.log("api status: ", appointment.status, status)
+            return false
+          }
+        }
+
+        return true
+      })
+    }
     console.log(response.data)
-    return response.data
+    return filteredResponse
   } catch (error) {
     console.error("Error Fetching appointments:", error)
   }

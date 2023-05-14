@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import "./appointments.css"
 import { useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
@@ -11,8 +11,11 @@ import { FormContext } from "../context/FormContext"
 const Appointments = () => {
   const navigate = useNavigate()
 
+  //filter state
+  const [filter, setFilter] = useState({})
+
   //useQuery
-  const { data, isSuccess, refetch } = useQueryGetAllAppointments()
+  const { data, isSuccess, refetch } = useQueryGetAllAppointments(filter)
 
   //useMutation
   const mutateToggleStatus = useMutateToggleStatus()
@@ -22,7 +25,7 @@ const Appointments = () => {
   const { setFormData } = useContext(FormContext)
 
   const handleFilterChange = (res) => {
-    console.log("Filters: ", res)
+    setFilter({ ...res })
   }
 
   const handleViewDetails = (e, item) => {

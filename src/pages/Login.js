@@ -8,8 +8,6 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault()
-    // const email = e.target[0].value
-    // const password = e.target[1].value
     const email = document.getElementById("email").value
     const password = document.getElementById("pass").value
     console.log(email, password)
@@ -50,9 +48,6 @@ const Login = () => {
         <div className="flex justify-end w-auto mt-7">
           <button
             className="rounded-2xl bg-c3 text-c4 font-bold"
-            onClick={(e) => {
-              handleLogin(e)
-            }}
           >
             🔑 Login
           </button>
