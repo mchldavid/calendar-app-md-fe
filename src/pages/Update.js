@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import AppointmentForm from "../components/Appointment/AppointmentForm"
 import Title from "../components/Title"
@@ -7,6 +7,7 @@ import {
   useMutateDeleteAppointment,
   useMutateEditAppointment,
 } from "../functions/useMutation"
+import Loading from "../components/Loaders/Loading"
 
 const Update = () => {
   const navigate = useNavigate()
@@ -38,8 +39,16 @@ const Update = () => {
     navigate(-1)
   }
 
+  useEffect(() => {
+    if (!formData) {
+      navigate("/appointments")
+    }
+  }, [formData, navigate])
+
   return (
     <div className="home max-w-md w-full flex flex-col p-6 h-full">
+      {mutateEditAppointment.isLoading && <Loading />}
+      {mutateDeleteAppointment.isLoading && <Loading />}
       <div className="flex justify-start mx-1 mb-5">
         <button
           onClick={handleBack}
@@ -62,18 +71,19 @@ const Update = () => {
         </button>
         <Title />
       </div>
-      {console.log("Form Context: ")}
-      <AppointmentForm
-        id={formData.id}
-        title={formData.name}
-        clickHandlerSave={handleSave}
-        clickHandlerDelete={handleDelete}
-        name={formData.name}
-        date={formData.date}
-        status={formData.status}
-        rightButtonName={"💾 Update"}
-        showDelete={true}
-      />
+      {formData && (
+        <AppointmentForm
+          id={formData.id}
+          title={formData.name}
+          clickHandlerSave={handleSave}
+          clickHandlerDelete={handleDelete}
+          name={formData.name}
+          date={formData.date}
+          status={formData.status}
+          rightButtonName={"💾 Update"}
+          showDelete={true}
+        />
+      )}
     </div>
   )
 }

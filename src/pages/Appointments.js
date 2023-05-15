@@ -15,14 +15,18 @@ const Appointments = () => {
   //filter state
   const [filter, setFilter] = useState({})
 
+  //context
+  const { formData, setFormData } = useContext(FormContext)
+
+  if (formData) {
+    setFormData(null)
+  }
+
   //useQuery
   const { data, isSuccess, isLoading } = useQueryGetAllAppointments(filter)
 
   //useMutation
   const mutateToggleStatus = useMutateToggleStatus()
-
-  //context
-  const { setFormData } = useContext(FormContext)
 
   const handleFilterChange = (res) => {
     console.log("filter change: ", res)
@@ -38,7 +42,6 @@ const Appointments = () => {
 
   const handleToggleStatus = (e, item) => {
     e.stopPropagation()
-    console.log("toggle is working: ", item)
 
     //Patch status of appointment
     mutateToggleStatus.mutate({

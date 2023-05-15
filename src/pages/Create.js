@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import AppointmentForm from "../components/Appointment/AppointmentForm"
 import Title from "../components/Title"
 import { useMutateCreateAppointment } from "../functions/useMutation"
+import Loading from "../components/Loaders/Loading"
 
 const Create = () => {
   const navigate = useNavigate()
@@ -11,8 +12,6 @@ const Create = () => {
   const mutateCreateAppointment = useMutateCreateAppointment()
 
   const formattedDate = new Date().toISOString().slice(0, 10)
-
-
 
   const handleSave = (data) => {
     console.log("name: ", data.name)
@@ -32,6 +31,7 @@ const Create = () => {
 
   return (
     <div className="home max-w-md w-full flex flex-col p-6 h-full">
+      {mutateCreateAppointment.isLoading && <Loading />}
       <div className="flex justify-start mx-1 mb-5">
         <button
           onClick={handleBack}

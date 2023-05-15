@@ -3,9 +3,10 @@ import "./login.css"
 import { useMutateLoginCredentials } from "../functions/useMutation"
 import Title from "../components/Title"
 import { ToastContainer, toast } from "react-toastify"
+import Loading from "../components/Loaders/Loading"
 
 const Login = () => {
-  const { mutate, isError } = useMutateLoginCredentials()
+  const { mutate, isError, isLoading} = useMutateLoginCredentials()
 
   const handleLogin = (e) => {
     e.preventDefault()
@@ -35,6 +36,7 @@ const Login = () => {
 
   return (
     <div className="login max-w-xs w-full flex flex-col">
+      {isLoading && <Loading />}
       <div className="flex justify-start mx-1 mb-5">
         <Title />
       </div>
@@ -60,9 +62,7 @@ const Login = () => {
           required
         />
         <div className="flex justify-end w-auto mt-7">
-          <button
-            className="transition-all hover:opacity-80 rounded-2xl bg-c3 text-c4 font-bold "
-          >
+          <button className="transition-all hover:opacity-80 rounded-2xl bg-c3 text-c4 font-bold ">
             🔑 Login
           </button>
         </div>
