@@ -20,37 +20,39 @@ const App = () => {
   }
 
   return (
-    <div className="font-inter text-sm flex justify-center items-center w-screen h-screen bg-c1 text-c4">
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route
-          index
-          path="/appointments"
-          element={
-            <AuthenticatedRoute>
-              <Appointments />
-            </AuthenticatedRoute>
-          }
-        />
+    <div className="font-inter text-sm flex flex-col justify-between items-center w-screen h-screen bg-c1 text-c4">
+      <div className="h-full w-full flex justify-center items-center">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route
+            index
+            path="/appointments"
+            element={
+              <AuthenticatedRoute>
+                <Appointments />
+              </AuthenticatedRoute>
+            }
+          />
 
-        <Route
-          path="/appointments/create"
-          element={
-            <AuthenticatedRoute>
-              <Create />
-            </AuthenticatedRoute>
-          }
-        />
-        <Route
-          path="/appointments/update/:name"
-          element={
-            <AuthenticatedRoute>
-              <Update />
-            </AuthenticatedRoute>
-          }
-        />
-        <Route path="/testapi" element={<TestApi />} />
-      </Routes>
+          <Route
+            path="/appointments/create"
+            element={
+              <AuthenticatedRoute>
+                <Create />
+              </AuthenticatedRoute>
+            }
+          />
+          <Route
+            path="/appointments/update/:name"
+            element={
+              <AuthenticatedRoute>
+                <Update />
+              </AuthenticatedRoute>
+            }
+          />
+          <Route path="/testapi" element={<TestApi />} />
+        </Routes>
+      </div>
     </div>
   )
 }
