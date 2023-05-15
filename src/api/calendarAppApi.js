@@ -16,7 +16,6 @@ export const loginApi = async (user) => {
       email: user.email,
       password: user.password,
     })
-    console.log(response.data)
     return response.data
   } catch (error) {
     console.error("Error Login:", error)
@@ -44,7 +43,6 @@ export const getAppointments = async (filter) => {
 
         if (status && status !== "all") {
           if (appointment.status !== status) {
-            console.log("api status: ", appointment.status, status)
             return false
           }
         }
@@ -54,7 +52,6 @@ export const getAppointments = async (filter) => {
 
       //to date date
       if (filter.sortDate === true) {
-        console.log("Is Sorted:", filter.sortDate)
         filteredResponse = filteredResponse.sort(function (a, b) {
           // Turn your strings into dates, and then subtract them
           // to get a value that is either negative, positive, or zero.
@@ -62,7 +59,7 @@ export const getAppointments = async (filter) => {
         })
       }
     }
-    console.log(response.data)
+    
     return filteredResponse
   } catch (error) {
     console.error("Error Fetching appointments:", error)
@@ -77,7 +74,7 @@ export const createAppointment = async (detail) => {
       date: detail.date,
       status: detail.status,
     })
-    console.log(response.data)
+    
     return response.data
   } catch (error) {
     console.error("Error in Create New:", error)
@@ -92,7 +89,7 @@ export const editAppointment = async (detail) => {
       date: detail.date,
       status: detail.status,
     })
-    console.log(response.data)
+    
     return response.data
   } catch (error) {
     console.error("Error in Edit Appointment:", error)
@@ -105,7 +102,7 @@ export const toggleStatusAppointment = async (detail) => {
     const response = await calendarAppApi.patch(`/appointment/${detail.id}`, {
       status: detail.status,
     })
-    console.log(response.data)
+    
     return response.data
   } catch (error) {
     console.error("Error in toggle status Appointment:", error)
@@ -116,7 +113,7 @@ export const toggleStatusAppointment = async (detail) => {
 export const deleteAppointment = async (detail) => {
   try {
     const response = await calendarAppApi.delete(`/appointment/${detail.id}`)
-    console.log(response.data)
+    
     return response.data
   } catch (error) {
     console.error("Error in Deleting Appointment:", error)

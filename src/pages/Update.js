@@ -29,7 +29,7 @@ const Update = () => {
   }
 
   const handleDelete = (data) => {
-    console.log("Delete: ", data.id)
+    
     mutateDeleteAppointment.mutate({
       id: data.id,
     })

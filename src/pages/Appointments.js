@@ -29,13 +29,13 @@ const Appointments = () => {
   const mutateToggleStatus = useMutateToggleStatus()
 
   const handleFilterChange = (res) => {
-    console.log("filter change: ", res)
+    
     setFilter({ ...res })
   }
 
   const handleViewDetails = (e, item) => {
     setFormData({ ...item })
-    console.log("Selected detail: ", item)
+    
     //redirect to view details by id
     navigate(`/appointments/update/${item.name}`)
   }

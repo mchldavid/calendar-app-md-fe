@@ -22,7 +22,7 @@ export const useMutateLoginCredentials = () => {
     },
     {
       onSuccess: (data) => {
-        console.log("Login Successful!: ", data.user.email)
+        
         setCurrentUser({
           accessToken: data.accessToken,
           user: {
@@ -60,7 +60,7 @@ export const useMutateToggleStatus = () => {
     },
     {
       onSuccess: () => {
-        console.log("Toggled Successfully!: ")
+        
       },
     }
   )
@@ -77,7 +77,7 @@ export const useMutateEditAppointment = () => {
     },
     {
       onSuccess: () => {
-        console.log("Edit Successful!")
+        
         setFormData(null)
         navigate(`/appointments`)
       },
@@ -96,7 +96,7 @@ export const useMutateDeleteAppointment = () => {
     },
     {
       onSuccess: () => {
-        console.log("Delete Successful! ")
+        
         setFormData(null)
         navigate(`/appointments`)
       },

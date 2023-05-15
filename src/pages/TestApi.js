@@ -21,13 +21,13 @@ const TestApi = () => {
           email: "guest@email.com",
           password: "Pass123",
         })
-        console.log("API LOGIN: ", getResponse)
+        
         setOutput(getResponse)
         break
 
       case 2:
         getResponse = await getAppointments()
-        console.log("API Get appointments: ", getResponse)
+        
         setOutput(getResponse)
         break
 
@@ -37,7 +37,7 @@ const TestApi = () => {
           date: "2023-12-01",
           status: "pending",
         })
-        console.log("API Create New: ", getResponse)
+        
         setOutput(getResponse)
         break
 
@@ -48,7 +48,7 @@ const TestApi = () => {
           date: "2023-12-01",
           status: "completed",
         })
-        console.log("API Edit: ", getResponse)
+        
         setOutput(getResponse)
         break
 
@@ -59,7 +59,7 @@ const TestApi = () => {
         })
         setToggle(getResponse.status)
 
-        console.log("API Toggle: ", getResponse)
+        
         setOutput(getResponse)
         break
 
@@ -69,7 +69,7 @@ const TestApi = () => {
         })
         setToggle(getResponse.status)
 
-        console.log("API Delete Appointment: ", getResponse)
+        
         setOutput(getResponse)
         break
       default:
@@ -77,7 +77,7 @@ const TestApi = () => {
   }
 
   const handleShow = (data) => {
-    console.log("Filter: ", data)
+    
   }
 
   return (

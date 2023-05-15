@@ -14,9 +14,9 @@ const Create = () => {
   const formattedDate = new Date().toISOString().slice(0, 10)
 
   const handleSave = (data) => {
-    console.log("name: ", data.name)
-    console.log("date: ", data.date)
-    console.log("status: ", data.status)
+    
+    
+    
 
     mutateCreateAppointment.mutate({
       name: data.name,

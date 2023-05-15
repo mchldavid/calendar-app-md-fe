@@ -6,9 +6,9 @@ const Create = () => {
 
   const handleSave = (e) => {
     e.preventDefault()
-    console.log("name: ", e.target[0].value)
-    console.log("date: ", e.target[1].value)
-    console.log("status: ", e.target[2].value)
+    
+    
+    
   }
 
   const handleBack = () => {
