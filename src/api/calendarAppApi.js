@@ -35,11 +35,11 @@ export const getAppointments = async (filter) => {
       filteredResponse = filteredResponse.filter((appointment) => {
         const { name, status } = filter
 
-        if (
-          name.toLowerCase() &&
-          appointment.name.toLowerCase() !== name.toLowerCase()
-        ) {
-          return false
+        if (name) {
+          const text = appointment.name.toLowerCase()
+          if (text.indexOf(name.toLowerCase()) < 0) {
+            return false
+          }
         }
 
         if (status && status !== "all") {

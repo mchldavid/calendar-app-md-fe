@@ -82,7 +82,7 @@ const Appointments = () => {
           }
         />
 
-        <ul className="flex flex-col gap-y-3 w-full h-full overflow-y-auto">
+        <ul className="flex flex-col gap-y-3 w-full h-[70vh] overflow-y-auto">
           {isLoading ? (
             <Loading />
           ) : isSuccess && data.length !== 0 ? (
