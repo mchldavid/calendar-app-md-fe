@@ -4,7 +4,6 @@ import Login from "./pages/Login"
 import Appointments from "./pages/Appointments"
 import Create from "./pages/Create"
 import Update from "./pages/Update"
-import TestApi from "./pages/TestApi"
 import { AuthContext } from "./context/AuthContext"
 
 const App = () => {
@@ -50,7 +49,6 @@ const App = () => {
               </AuthenticatedRoute>
             }
           />
-          <Route path="/testapi" element={<TestApi />} />
         </Routes>
       </div>
     </div>
