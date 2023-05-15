@@ -13,7 +13,6 @@ const Login = () => {
     const email = document.getElementById("email").value
     const password = document.getElementById("pass").value
     
-
     //useMutation for POST login, if success redirect to apointment page
     mutate({
       email: email,
