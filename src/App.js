@@ -5,6 +5,7 @@ import Appointments from "./pages/Appointments"
 import Create from "./pages/Create"
 import Update from "./pages/Update"
 import { AuthContext } from "./context/AuthContext"
+import Footer from "./components/Footer"
 
 const App = () => {
   //if there's a logged in person, redirect to
@@ -50,7 +51,9 @@ const App = () => {
             }
           />
         </Routes>
+        
       </div>
+      <Footer />
     </div>
   )
 }
