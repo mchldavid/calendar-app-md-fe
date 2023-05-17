@@ -75,14 +75,15 @@ const Appointments = () => {
         <Title />
       </div>
 
-      <div className=" overflow-hidden">
+      <div className="overflow-hidden flex flex-col">
         <Filter
           handleFilterChange={(filterResult) =>
             handleFilterChange(filterResult)
           }
         />
 
-        <ul className="flex flex-col gap-y-3 w-full h-[70vh] overflow-y-auto">
+        {/* List appointments */}
+        <ul className="flex flex-col gap-y-3 w-full h-full overflow-y-auto">
           {isLoading ? (
             <Loading />
           ) : isSuccess && data.length !== 0 ? (
@@ -147,8 +148,6 @@ const Appointments = () => {
           )}
         </ul>
       </div>
-
-      {/* List appointments */}
 
       <div className="flex justify-end mt-4 w-full">
         <button
